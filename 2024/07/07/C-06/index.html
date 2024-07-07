@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="侯捷C++面向对象编程（下）课程打卡 Day64. specialization 特化4.1 全特化 full specialization模板是泛化，特化是泛化的反面，可以针对不同的类型，来设计不同的东西  其语法为template&lt;&gt; struct xxx&lt;type&gt;  12345678910111213template&lt;&gt;struct hash&lt;ch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="侯捷C++面向对象编程下day6">
+<meta property="og:url" content="http://example.com/2024/07/07/C-06/index.html">
+<meta property="og:site_name" content="Pluto">
+<meta property="og:description" content="侯捷C++面向对象编程（下）课程打卡 Day64. specialization 特化4.1 全特化 full specialization模板是泛化，特化是泛化的反面，可以针对不同的类型，来设计不同的东西  其语法为template&lt;&gt; struct xxx&lt;type&gt;  12345678910111213template&lt;&gt;struct hash&lt;ch">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/pluto/img/404.jpg">
+<meta property="og:image" content="http://example.com/pluto/img/404.jpg">
+<meta property="og:image" content="http://example.com/pluto/img/404.jpg">
+<meta property="og:image" content="http://example.com/pluto/img/404.jpg">
+<meta property="og:image" content="http://example.com/pluto/img/404.jpg">
+<meta property="article:published_time" content="2024-07-07T09:42:20.000Z">
+<meta property="article:modified_time" content="2024-07-07T08:29:33.550Z">
+<meta property="article:author" content="Pluto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/pluto/img/404.jpg">
+
+
+<title >侯捷C++面向对象编程下day6</title>
+
+<!-- Favicon -->
+
+    <link href='/pluto/log.svg?v=2.2.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/pluto/log.svg?v=2.2.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/pluto/log.svg?v=2.2.2' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+    <link href='/pluto/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/pluto/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/pluto/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Pluto","root":"/pluto/","typed_text":["a Computer Science Student From UESTC"],"theme_version":"2.2.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"log.svg","icon16":"log.svg","icon32":"log.svg","apple_touch_icon":"log.svg","webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"failure.ico","show_text":"(/≧▽≦/)咦！又好了！","hide_text":"(●—●)喔哟，崩溃啦!"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-07-07 16:29:33"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/pluto/css/index.css?v=2.2.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/pluto/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/pluto/log.svg">
+    
+    
+        <div class="trm-logo-text">
+            Whisper<span>Pluto</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/pluto/" target="">
+                    home
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/pluto/archives2/" target="">
+                            archives2
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/pluto/archives/" target="">
+                    archives
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/pluto/categories/" target="">
+                    categories
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/pluto/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            侯捷C++面向对象编程下day6
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/pluto/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/pluto/pluto.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        旧城以西
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/1-pluto1?tab=repositories" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://gitlab.com/" title="gitlab" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-gitlab"></i>
+        </a>
+    
+        <a href="https://x.com" title="X" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                Mars
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:pluto.123452022@outlook.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            07/07
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            17:42
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Pluto
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h3 id="侯捷C-面向对象编程（下）课程打卡-Day6"><a href="#侯捷C-面向对象编程（下）课程打卡-Day6" class="headerlink" title="侯捷C++面向对象编程（下）课程打卡 Day6"></a>侯捷C++面向对象编程（下）课程打卡 Day6</h3><h4 id="4-specialization-特化"><a href="#4-specialization-特化" class="headerlink" title="4. specialization 特化"></a>4. specialization 特化</h4><h5 id="4-1-全特化-full-specialization"><a href="#4-1-全特化-full-specialization" class="headerlink" title="4.1 全特化 full specialization"></a>4.1 全特化 full specialization</h5><p>模板是<em>泛化</em>，特化是泛化的反面，可以针对<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E4%B8%8D%E5%90%8C%E7%9A%84&spm=1001.2101.3001.7020">不同的</a>类型，来设计不同的东西</p>
+<ul>
+<li>其语法为<code>template&lt;&gt;</code> <code>struct xxx&lt;type&gt;</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">hash</span>&lt;<span class="type">char</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">char</span>&amp; x)</span> <span class="type">const</span> </span>&#123;<span class="keyword">return</span> x;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">hash</span>&lt;<span class="type">int</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">	<span class="function"><span class="type">size_t</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">int</span>&amp; x)</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> x; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里编译器就会用 <code>int</code> 的那段代码；注意：<code>hash&lt;int&gt;()</code> 是创建临时变量</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="built_in">hash</span>&lt;<span class="type">int</span>&gt;()(<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-偏特化-partial-specialization"><a href="#4-2-偏特化-partial-specialization" class="headerlink" title="4.2 偏特化 partial specialization"></a>4.2 偏特化 partial specialization</h5><h6 id="4-2-1-个数上的偏"><a href="#4-2-1-个数上的偏" class="headerlink" title="4.2.1 个数上的偏"></a>4.2.1 个数上的偏</h6><p>例如：第一个<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0&spm=1001.2101.3001.7020">模板参数</a>我想针对 <code>bool</code> 特别设计</p>
+<p><img src="https://raw.githubusercontent.com/PLUS-WAVE/blog-image/master/img/blog/2023-08-07/image-20230807155256372.png" alt="image-20230807155256372"  data-tag='post-image' loading="lazy" onerror='this.onerror=null;this.src="/pluto/img/404.jpg"'></p>
+<p>注意绑定模板参数不能跳着绑定，需要从左到右</p>
+<h6 id="4-2-2-范围上的偏"><a href="#4-2-2-范围上的偏" class="headerlink" title="4.2.2 范围上的偏"></a>4.2.2 范围上的偏</h6><p>例如：想要当模板参数是指针时特别设计</p>
+<p><img src="https://raw.githubusercontent.com/PLUS-WAVE/blog-image/master/img/blog/2023-08-07/image-20230807160122944.png" alt="image-20230807160122944"  data-tag='post-image' loading="lazy" onerror='this.onerror=null;this.src="/pluto/img/404.jpg"'></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C&lt;string&gt; obj1; <span class="comment">//编译器会调用上面的</span></span><br><span class="line">C&lt;string*&gt; obj2; <span class="comment">//编译器会调用下面的</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-三个C-11新特性"><a href="#5-三个C-11新特性" class="headerlink" title="5 三个C++11新特性"></a>5 三个C++11新特性</h4><h5 id="5-1-variadic-templates"><a href="#5-1-variadic-templates" class="headerlink" title="5.1 variadic templates"></a>5.1 variadic templates</h5><p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0&spm=1001.2101.3001.7020">模板参数</a>可变化，其语法为 <code>...</code> (加在哪看情况)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当参数pack里没有东西了就调用这个基本函数结束输出</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用于打印多个参数的可变参数模板函数</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Args&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> T&amp; first, <span class="type">const</span> Args&amp;... args)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; first &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    <span class="built_in">print</span>(args...);  <span class="comment">// 使用剩余参数进行递归调用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="number">1</span>, <span class="string">&quot;Hello&quot;</span>, <span class="number">3.14</span>, <span class="string">&quot;World&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用 <code>sizeof...(args)</code> 来得到参数pack里的数量</p>
+<h5 id="5-2-auto"><a href="#5-2-auto" class="headerlink" title="5.2 auto"></a>5.2 auto</h5><p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%BC%96%E8%AF%91%E5%99%A8&spm=1001.2101.3001.7020">编译器</a>通过赋值的返回值类型，自动匹配返回类型</p>
+<p><img src="https://raw.githubusercontent.com/PLUS-WAVE/blog-image/master/img/blog/2023-08-08/image-20230808080207006.png" alt="image-20230808080207006"  data-tag='post-image' loading="lazy" onerror='this.onerror=null;this.src="/pluto/img/404.jpg"'></p>
+<p>注：下面这样是不行的，第一行编译器找不到返回值类型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> ite; <span class="comment">// error</span></span><br><span class="line">ite = <span class="built_in">find</span>(c.<span class="built_in">begin</span>(), c.<span class="built_in">end</span>(), target);</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-3-ranged-base-for"><a href="#5-3-ranged-base-for" class="headerlink" title="5.3 ranged-base for"></a>5.3 ranged-base for</h5><p><code>for</code> <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%BE%AA%E7%8E%AF&spm=1001.2101.3001.7020">循环</a>的新语法，<code>for(声明变量 : 容器)</code>，编译器会从容器中依次拿出数据赋值给声明变量中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (decl : coll)</span><br><span class="line">&#123;</span><br><span class="line">    statement</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i : &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>&#125;) <span class="comment">// &#123;xx,xx,xx&#125; 也是c++11的新特性</span></span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：改变原容器中的值需要 <em>pass by reference</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">double</span>&gt; vec;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> elem : vec) <span class="comment">//值传递</span></span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; elem &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; elem : vec) <span class="comment">//引用传递</span></span><br><span class="line">&#123;</span><br><span class="line">    elem *= <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-多态-虚机制"><a href="#6-多态-虚机制" class="headerlink" title="6 多态 虚机制"></a>6 多态 虚机制</h4><p>直接看链接吧</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/WJwwwwwww/article/details/132268502">https://blog.csdn.net/WJwwwwwww/article/details/132268502</a></p>
+<h4 id="7-reference、const、new-delete"><a href="#7-reference、const、new-delete" class="headerlink" title="7 reference、const、new&#x2F;delete"></a>7 reference、const、new&#x2F;delete</h4><h5 id="7-1-reference"><a href="#7-1-reference" class="headerlink" title="7.1 reference"></a>7.1 reference</h5><p><code>x</code> 是整数，占4字节；<code>p</code> 是指针占4字节（32位）；<code>r</code> 代表<code>x</code>，那么<code>r</code>也是整数，占4字节</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span>* p = &amp;x; <span class="comment">// 地址和指针是互通的</span></span><br><span class="line"><span class="type">int</span>&amp; r = x; <span class="comment">// 引用是代表x</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>引用与指针不同，只能代表一个变量，不能改变</strong></p>
+</blockquote>
+<blockquote>
+<p>引用底部的实现也是指针，但是注意 object 和它的 reference 的大小是相同的，地址也是相同的（是<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%BC%96%E8%AF%91%E5%99%A8&spm=1001.2101.3001.7020">编译器</a>制造的假象）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sizeof</span>(r) == <span class="built_in">sizeof</span>(x)</span><br><span class="line">&amp;x == &amp;r</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>reference 通常不用于<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F&spm=1001.2101.3001.7020">声明变量</a>，用于参数类型和返回类型的描述</p>
+<p><img src="https://raw.githubusercontent.com/PLUS-WAVE/blog-image/master/img/blog/2023-08-08/image-20230808091745371.png" alt="image-20230808091745371"  data-tag='post-image' loading="lazy" onerror='this.onerror=null;this.src="/pluto/img/404.jpg"'></p>
+<p>以下 <code>imag(const double&amp; im)</code> 和 <code>imag(const double im)</code> 的签名signature 在C++中是视为相同的——二者不能同时存在</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">imag</span><span class="params">(<span class="type">const</span> <span class="type">double</span>&amp; im)</span> <span class="comment">/*const*/</span> </span>&#123;....&#125;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">imag</span><span class="params">(<span class="type">const</span> <span class="type">double</span> im)</span></span>&#123;....&#125; <span class="comment">//Ambiguity</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：<em>const</em> 是函数签名的一部分，所以加上后是可以共存的</p>
+<h5 id="7-2-const"><a href="#7-2-const" class="headerlink" title="7.2 const"></a>7.2 const</h5><p><code>const</code> 加在函数后面 —— 常量成员函数（成员函数才有）：表示这个成员函数保证不改变 class 的 data</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>const object</th>
+<th>non-const object</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>const member function（保证不改变 data members）</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>non-const member function（不保证 data members 不变）</td>
+<td>❌</td>
+<td>✔️</td>
+</tr>
+</tbody></table>
+<p><strong>COW</strong>：<em>Copy On Write</em></p>
+<p>多个指针共享一个 “Hello”；但当a要改变内容时， 系统会单独复制一份出来给a来改，即 COW</p>
+<p><img src="https://raw.githubusercontent.com/PLUS-WAVE/blog-image/master/img/blog/2023-08-01/image-20230801101907977.png" alt="image-20230801101907977"  data-tag='post-image' loading="lazy" onerror='this.onerror=null;this.src="/pluto/img/404.jpg"'></p>
+<p>在常量成员函数中，数据不能被改变所以不需要COW；而非常量成员函数中数据就有可能被改变，需要COW</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">charT</span><br><span class="line"><span class="keyword">operator</span>[] (size_type pos)<span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">	.... <span class="comment">/* 不必考虑COW */</span>   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">reference</span><br><span class="line"><span class="keyword">operator</span>[] (size_type pos)</span><br><span class="line">&#123;</span><br><span class="line">    .... <span class="comment">/* 必须考虑COW */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数签名不包括返回类型但包括<code>const</code>，所以上面两个函数是共存的</p>
+<p><strong>当两个版本同时存在时，*const object* 只能调用 *const* 版本，*non-const object* 只能调用 *non-const* 版本</strong></p>
+<p>7.3 new delete</p>
+<h6 id="7-3-1-全局重载"><a href="#7-3-1-全局重载" class="headerlink" title="7.3.1 全局重载"></a>7.3.1 全局重载</h6><ul>
+<li>可以全局重载 <code>operator new</code>、<code>operator delete</code>、<code>operator new[]</code>、<code>operator delete[]</code></li>
+<li>这几个函数是在 new 的时候，编译器的分解步骤中的函数，是给编译器调用的</li>
+</ul>
+<p>注意这个影响非常大！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span></span>&#123;....&#125;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>[](<span class="type">size_t</span> size)&#123;....&#125;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">void</span> <span class="keyword">operator</span> <span class="built_in">delete</span>(<span class="type">void</span>* ptr)&#123;....&#125;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">void</span> <span class="keyword">operator</span> <span class="keyword">delete</span>[](<span class="type">void</span>* ptr)&#123;....&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="7-3-2-class中成员重载"><a href="#7-3-2-class中成员重载" class="headerlink" title="7.3.2 class中成员重载"></a>7.3.2 class中成员重载</h6><ul>
+<li>可以重载 class 中成员函数 <code>operator new</code>、<code>operator delete</code>、<code>operator new[]</code>、<code>operator delete[]</code></li>
+<li>重载之后，new 这个类时，编译器会使用重载之后的</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>：</span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span></span>&#123;....&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span>* ptr, <span class="type">size_t</span> size)</span></span>&#123;....&#125; <span class="comment">// size_t可有可无</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>[](<span class="type">size_t</span> size)&#123;....&#125;</span><br><span class="line">    <span class="type">void</span> <span class="keyword">operator</span> <span class="keyword">delete</span>[](<span class="type">void</span>* ptr, <span class="type">size_t</span> size)&#123;....&#125; <span class="comment">// size_t可有可无</span></span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里优先调用 members，若无就调用 globals</span></span><br><span class="line">Foo* pf = <span class="keyword">new</span> Foo;</span><br><span class="line"><span class="keyword">delete</span> pf;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里强制调用 globals</span></span><br><span class="line">Foo* pf = ::<span class="keyword">new</span> Foo;</span><br><span class="line">::<span class="keyword">delete</span> pf;</span><br></pre></td></tr></table></figure>
+
+<h6 id="7-3-3-placement-new-delete"><a href="#7-3-3-placement-new-delete" class="headerlink" title="7.3.3 placement new delete"></a>7.3.3 placement new delete</h6><p>可以重载 class 成员函数 <em>placement new</em> <code>operator new()</code>，可以写出多个版本，前提是每一个版本的声明有独特的传入参数列，且其中第一个参数必须是 <em>size_t</em>，其余参数出现于 <code>new(.....)</code> 小括号内（即 <em>placement arguments</em>）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Foo* pf = <span class="built_in">new</span>(<span class="number">300</span>, <span class="string">&#x27;c&#x27;</span>) Foo; <span class="comment">// 其中第一个参数size_t不用写</span></span><br><span class="line"><span class="comment">// 对应的operator new</span></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="keyword">operator</span> <span class="title">new</span> <span class="params">(<span class="type">size_t</span> size, <span class="type">long</span> extra, <span class="type">char</span> init)</span></span>&#123;....&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以重载对应的 class 成员函数 <code>operator delete()</code>，但其不会被delete调用，只当 new 调用的构造函数抛出异常 exception 的时候，才会调用来归还<strong>未能完全创建成功</strong>的 object 占用的内存</p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/pluto/2024/07/07/C-05/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/pluto/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /pluto/categories/C/">
+                    C++
+                </a>
+            </div>
+            <h5>
+                <a href="/pluto/2024/07/07/C-05/" class="trm-anima-link">
+                    侯捷C++面向对象编程下day5
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/07/07</li>
+                <li>15:42</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v7.2.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                Theme - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.2.2
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/pluto/js/plugins/typing.js?v=2.2.2"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/pluto/js/main.js?v=2.2.2"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
