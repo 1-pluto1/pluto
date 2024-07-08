@@ -7,20 +7,20 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="记录数据结构和算法的学习笔记">
+<meta name="description" content="STL学习二、Stack2.1 介绍栈作为数据结构中的一种，是STL实现的一个先进先出，后进后出的容器。 1234567&#x2F;&#x2F;头文件添加#include&lt;stack&gt;&#x2F;&#x2F;声明stack&lt;int&gt; s;stack&lt;string&gt; s;stack&lt;node&gt; s;&#x2F;&#x2F;node是结构体类型  2.2 方法函数   代码 含义    s.push(ele) 元">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tree">
-<meta property="og:url" content="http://example.com/2024/06/26/Algothum/index.html">
+<meta property="og:title" content="STL学习打卡Day02">
+<meta property="og:url" content="http://example.com/2024/07/08/STL02/index.html">
 <meta property="og:site_name" content="Pluto">
-<meta property="og:description" content="记录数据结构和算法的学习笔记">
+<meta property="og:description" content="STL学习二、Stack2.1 介绍栈作为数据结构中的一种，是STL实现的一个先进先出，后进后出的容器。 1234567&#x2F;&#x2F;头文件添加#include&lt;stack&gt;&#x2F;&#x2F;声明stack&lt;int&gt; s;stack&lt;string&gt; s;stack&lt;node&gt; s;&#x2F;&#x2F;node是结构体类型  2.2 方法函数   代码 含义    s.push(ele) 元">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-06-26T05:30:49.000Z">
-<meta property="article:modified_time" content="2024-06-26T07:18:29.112Z">
+<meta property="article:published_time" content="2024-07-08T13:27:29.000Z">
+<meta property="article:modified_time" content="2024-07-08T13:47:40.897Z">
 <meta property="article:author" content="Pluto">
 <meta name="twitter:card" content="summary">
 
 
-<title >Tree</title>
+<title >STL学习打卡Day02</title>
 
 <!-- Favicon -->
 
@@ -63,7 +63,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Pluto","root":"/pluto/","typed_text":["a Computer Science Student From UESTC"],"theme_version":"2.2.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"log.svg","icon16":"log.svg","icon32":"log.svg","apple_touch_icon":"log.svg","webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"failure.ico","show_text":"(/≧▽≦/)咦！又好了！","hide_text":"(●—●)喔哟，崩溃啦!"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-06-26 15:18:29"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-07-08 21:47:40"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/pluto/css/index.css?v=2.2.2" id="trm-switch-style">
@@ -229,7 +229,7 @@
                             NEWS LETTER
                         </div>
                         <h1 class="trm-mb-30 trm-hsmb-font">
-                            Tree
+                            STL学习打卡Day02
                         </h1>
 
                         
@@ -344,13 +344,13 @@
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
-            06/26
+            07/08
         </div>
     </div>
     <div class="col-sm-4">
         <div class="trm-card trm-label trm-label-light text-center">
             <i class="iconfont far fa-clock trm-icon"></i><br>
-            13:30
+            21:27
         </div>
     </div>
     <div class="col-sm-4">
@@ -362,7 +362,49 @@
 </div>
 <div class="trm-card ">
     <article id="article-container" class="trm-publication">
-    <p>记录数据结构和算法的学习笔记</p>
+    <h2 id="STL学习"><a href="#STL学习" class="headerlink" title="STL学习"></a>STL学习</h2><h3 id="二、Stack"><a href="#二、Stack" class="headerlink" title="二、Stack"></a>二、Stack</h3><h4 id="2-1-介绍"><a href="#2-1-介绍" class="headerlink" title="2.1 介绍"></a>2.1 介绍</h4><p>栈作为数据结构中的一种，是STL实现的一个先进先出，后进后出的容器。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//头文件添加</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//声明</span></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">stack&lt;string&gt; s;</span><br><span class="line">stack&lt;node&gt; s;<span class="comment">//node是结构体类型</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-方法函数"><a href="#2-2-方法函数" class="headerlink" title="2.2 方法函数"></a>2.2 方法函数</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s.push(ele)</td>
+<td>元素ele入列，增加元素O(1)</td>
+</tr>
+<tr>
+<td>s.pop()</td>
+<td>移出栈顶元素O(1)</td>
+</tr>
+<tr>
+<td>s.top()</td>
+<td>取得栈顶元素（但是不删除）O(1)</td>
+</tr>
+<tr>
+<td>s.empty()</td>
+<td>检测栈内是否为空，空为真O(1)</td>
+</tr>
+<tr>
+<td>s.size()</td>
+<td>返回栈内元素个数O(1)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="2-3-栈遍历"><a href="#2-3-栈遍历" class="headerlink" title="2.3 栈遍历"></a>2.3 栈遍历</h4><h5 id="2-3-1-栈遍历"><a href="#2-3-1-栈遍历" class="headerlink" title="2.3.1 栈遍历"></a>2.3.1 栈遍历</h5><p>栈只能对栈顶元素进行操作，如果想要进行遍历，只能将栈中元素一个个取出来存在数组中</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>&gt; st;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) st.<span class="built_in">push</span>(i);</span><br><span class="line"><span class="keyword">while</span> (!st.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">    <span class="type">int</span> tp = st.<span class="built_in">top</span>(); <span class="comment">// 栈顶元素</span></span><br><span class="line">    st.<span class="built_in">pop</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-2-数组模拟栈进行遍历"><a href="#2-3-2-数组模拟栈进行遍历" class="headerlink" title="2.3.2 数组模拟栈进行遍历"></a>2.3.2 数组模拟栈进行遍历</h5><p>通过一个数组对栈进行模拟，一个存放下标的变量<strong>top</strong>模拟指向栈顶的指针。</p>
+<p>一般来说单调栈和单调队列写法均可以使用额外变量<strong>tt</strong>或者<strong>hh</strong>来进行模拟</p>
+<p>特点：比STL的stack速度更快，遍历元素方便</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> s[<span class="number">100</span>]; <span class="comment">// 栈 从左至右为栈底到栈顶</span></span><br><span class="line"><span class="type">int</span> tt = <span class="number">-1</span>; <span class="comment">// tt 代表栈顶指针,初始栈内无元素，tt为-1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">5</span>; ++i) &#123;</span><br><span class="line">	<span class="comment">//入栈 </span></span><br><span class="line">	s[++tt] = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 出栈</span></span><br><span class="line"><span class="type">int</span> top_element = s[tt--]; </span><br><span class="line"></span><br><span class="line"><span class="comment">//入栈操作示意</span></span><br><span class="line"><span class="comment">//  0  1  2  3  4  5  </span></span><br><span class="line"><span class="comment">//                tt</span></span><br><span class="line"><span class="comment">//出栈后示意</span></span><br><span class="line"><span class="comment">//  0  1  2  3  4 </span></span><br><span class="line"><span class="comment">//              tt</span></span><br></pre></td></tr></table></figure>
+
 
 </article>
     
@@ -380,7 +422,7 @@
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
-        <a href="/pluto/2024/06/27/english/" class="trm-cover-frame trm-anima-link">
+        <a href="/pluto/2024/07/08/STL03/" class="trm-cover-frame trm-anima-link">
             
             
                 <img alt="cover" class="no-fancybox" src="/pluto/img/block.jpg">
@@ -389,19 +431,19 @@
         
         <div class="trm-card-descr">
             <div class="trm-label trm-category trm-mb-20">
-                <a href=" /pluto/categories/English/">
-                    English
+                <a href=" #.">
+                    Unclassified
                 </a>
             </div>
             <h5>
-                <a href="/pluto/2024/06/27/english/" class="trm-anima-link">
-                    english
+                <a href="/pluto/2024/07/08/STL03/" class="trm-anima-link">
+                    STL学习打卡Day03
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
-                <li>24/06/27</li>
-                <li>11:29</li>
+                <li>24/07/08</li>
+                <li>22:00</li>
                 
                 
             </ul>
@@ -412,7 +454,7 @@
     
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation">
-        <a href="/pluto/2024/06/26/CSAPP/" class="trm-cover-frame trm-anima-link">
+        <a href="/pluto/2024/07/07/STL01/" class="trm-cover-frame trm-anima-link">
             
             
                 <img alt="cover" class="no-fancybox" src="/pluto/img/block.jpg">
@@ -421,19 +463,19 @@
         
         <div class="trm-card-descr">
             <div class="trm-label trm-category trm-mb-20">
-                <a href=" /pluto/categories/CSAPP/">
-                    CSAPP
+                <a href=" #.">
+                    Unclassified
                 </a>
             </div>
             <h5>
-                <a href="/pluto/2024/06/26/CSAPP/" class="trm-anima-link">
-                    深入理解计算机系统
+                <a href="/pluto/2024/07/07/STL01/" class="trm-anima-link">
+                    STL学习打卡Day01
                 </a>
             </h5>
             <div class="trm-divider trm-mb-20 trm-mt-20"></div>
             <ul class="trm-card-data trm-label">
-                <li>24/06/26</li>
-                <li>13:30</li>
+                <li>24/07/07</li>
+                <li>20:48</li>
                 
                 
             </ul>
