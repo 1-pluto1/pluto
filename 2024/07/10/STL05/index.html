@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="STL学习九、string9.1 介绍string是一个字符串类，和char型字符串类似。 可以把string理解为一个字符串类型，像int一样可以定义。 9.2 初始化及定义123456789101112131415&#x2F;&#x2F;头文件#include&lt;string&gt;&#x2F;&#x2F;1.string str1;&#x2F;&#x2F;生成空字符串&#x2F;&#x2F;2.string str2(&quot;123456789&quot;);&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL学习打卡Day05">
+<meta property="og:url" content="http://example.com/2024/07/10/STL05/index.html">
+<meta property="og:site_name" content="Pluto">
+<meta property="og:description" content="STL学习九、string9.1 介绍string是一个字符串类，和char型字符串类似。 可以把string理解为一个字符串类型，像int一样可以定义。 9.2 初始化及定义123456789101112131415&#x2F;&#x2F;头文件#include&lt;string&gt;&#x2F;&#x2F;1.string str1;&#x2F;&#x2F;生成空字符串&#x2F;&#x2F;2.string str2(&quot;123456789&quot;);&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-10T04:00:29.000Z">
+<meta property="article:modified_time" content="2024-07-10T07:55:16.508Z">
+<meta property="article:author" content="Pluto">
+<meta name="twitter:card" content="summary">
+
+
+<title >STL学习打卡Day05</title>
+
+<!-- Favicon -->
+
+    <link href='/pluto/log.svg?v=2.2.2' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/pluto/log.svg?v=2.2.2' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+    <link href='/pluto/log.svg?v=2.2.2' rel='apple-touch-icon' sizes='180x180' ></link>
+
+
+    <link href='/pluto/site.webmanifest' rel='manifest' ></link>
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/pluto/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/pluto/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Pluto","root":"/pluto/","typed_text":["a Computer Science Student From UESTC"],"theme_version":"2.2.2","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"log.svg","icon16":"log.svg","icon32":"log.svg","apple_touch_icon":"log.svg","webmanifest":"/site.webmanifest","visibilitychange":true,"hidden":"failure.ico","show_text":"(/≧▽≦/)咦！又好了！","hide_text":"(●—●)喔哟，崩溃啦!"},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode","notice_outdate_message":"It has been undefined days since the last update, the content of the article may be outdated.","sticky":"TOP","just":"Just","min":"minutes ago","hour":"hours ago","day":"days ago","month":"months ago"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"","prefix":"The blog has been lovely to run undefined day"},"danmu":{"enable":false,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2024-07-10 15:55:16"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/pluto/css/index.css?v=2.2.2" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/pluto/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/pluto/log.svg">
+    
+    
+        <div class="trm-logo-text">
+            Whisper<span>Pluto</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/pluto/" target="">
+                    home
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/pluto/archives2/" target="">
+                            archives2
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/pluto/archives/" target="">
+                    archives
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/pluto/categories/" target="">
+                    categories
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/pluto/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            STL学习打卡Day05
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/pluto/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2024
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/pluto/pluto.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        旧城以西
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/1-pluto1?tab=repositories" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://gitlab.com/" title="gitlab" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-gitlab"></i>
+        </a>
+    
+        <a href="https://x.com" title="X" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                Mars
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:pluto.123452022@outlook.com" class="trm-btn">
+            Contact Me
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            07/10
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            12:00
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Pluto
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="STL学习"><a href="#STL学习" class="headerlink" title="STL学习"></a>STL学习</h2><h3 id="九、string"><a href="#九、string" class="headerlink" title="九、string"></a>九、string</h3><h4 id="9-1-介绍"><a href="#9-1-介绍" class="headerlink" title="9.1 介绍"></a>9.1 介绍</h4><p>string是一个字符串类，和<strong>char</strong>型字符串类似。</p>
+<p>可以把string理解为一个字符串类型，像int一样可以定义。</p>
+<h4 id="9-2-初始化及定义"><a href="#9-2-初始化及定义" class="headerlink" title="9.2 初始化及定义"></a>9.2 初始化及定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//头文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1.</span></span><br><span class="line">string str1;<span class="comment">//生成空字符串</span></span><br><span class="line"><span class="comment">//2.</span></span><br><span class="line"><span class="function">string <span class="title">str2</span><span class="params">(<span class="string">&quot;123456789&quot;</span>)</span></span>;<span class="comment">//生成&quot;123456789&quot;的复制品</span></span><br><span class="line"><span class="comment">//3.</span></span><br><span class="line"><span class="function">string <span class="title">str3</span><span class="params">(<span class="string">&quot;12345&quot;</span><span class="number">.0</span>,<span class="number">3</span>)</span></span>;<span class="comment">//结果为&quot;123&quot;,从0开始，长度为3</span></span><br><span class="line"><span class="comment">//4.</span></span><br><span class="line"><span class="function">string <span class="title">str4</span><span class="params">(<span class="string">&quot;12345&quot;</span>,<span class="number">5</span>)</span></span>;<span class="comment">//结果为&quot;12345&quot;,长度为5</span></span><br><span class="line"><span class="comment">//5.</span></span><br><span class="line"><span class="function">string <span class="title">str5</span><span class="params">(<span class="number">5</span>,<span class="string">&#x27;2&#x27;</span>)</span></span>;<span class="comment">//结果为&quot;22222&quot;,构造5个字符&#x27;2&#x27;连接成的字符串</span></span><br><span class="line"><span class="comment">//6.</span></span><br><span class="line"><span class="function">string <span class="title">str6</span><span class="params">(str2,<span class="number">2</span>)</span></span>;<span class="comment">//结果为&quot;3456789&quot;,截取第三个元素(2对应第三位)到最后</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>简单使用</strong></p>
+<ul>
+<li><p>访问单个字符：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	string s = <span class="string">&quot;xing ma qi!!!&quot;</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++)</span><br><span class="line">		cout &lt;&lt; s[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>string数组使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	string s[<span class="number">10</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">		s[i] = <span class="string">&quot;loading...  &quot;</span> ;</span><br><span class="line">		cout &lt;&lt; s[i] &lt;&lt; i &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">loading...  <span class="number">1</span></span><br><span class="line">loading...  <span class="number">2</span></span><br><span class="line">loading...  <span class="number">3</span></span><br><span class="line">loading...  <span class="number">4</span></span><br><span class="line">loading...  <span class="number">5</span></span><br><span class="line">loading...  <span class="number">6</span></span><br><span class="line">loading...  <span class="number">7</span></span><br><span class="line">loading...  <span class="number">8</span></span><br><span class="line">loading...  <span class="number">9</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="9-3-string特性"><a href="#9-3-string特性" class="headerlink" title="9.3 string特性"></a>9.3 string特性</h4><ul>
+<li><p>支持<strong>比较</strong>运算符</p>
+<p>string字符串支持常见的比较操作符（&gt;,&gt;&#x3D;,&lt;,&lt;&#x3D;,&#x3D;&#x3D;,!&#x3D;），支持string与C-string的比较（如 str &lt; “hello”）。<br>在使用&gt;,&gt;&#x3D;,&lt;,&lt;&#x3D;这些操作符的时候是根据“当前字符特性”将字符按 字典顺序 进行逐一得 比较。字典排序靠前的字符小， 比较的顺序是从前向后比较，遇到不相等的字符就按这个位置上的两个字符的比较结果确定两个字符串的大小（前面减后面）。</p>
+<p>同时，string (“aaaa”) &lt;string(aaaaa)。</p>
+</li>
+<li><p>支持<code>+</code><strong>运算</strong>符，代表拼接字符串<br>string字符串可以拼接，通过”+”运算符进行拼接。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;123&quot;</span>;</span><br><span class="line">string s2 = <span class="string">&quot;456&quot;</span>;</span><br><span class="line">string s = s1 + s2;</span><br><span class="line">cout &lt;&lt; s;   <span class="comment">//123456</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="9-4-读入详解"><a href="#9-4-读入详解" class="headerlink" title="9.4 读入详解"></a>9.4 读入详解</h4><p><strong>读入字符串，遇空格，回车结束</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s;</span><br><span class="line">cin &gt;&gt; s;</span><br></pre></td></tr></table></figure>
+
+<p><strong>读入一行字符串（包括空格），遇回车结束</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s;</span><br><span class="line"><span class="built_in">getline</span>(cin, s);</span><br></pre></td></tr></table></figure>
+
+<p>注意: <code>getline(cin, s)</code>会获取前一个输入的换行符，需要在前面添加读取换行符的语句。如：<code>getchar()</code> 或<code> cin.get()</code></p>
+<p>错误读取：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line">string s;</span><br><span class="line">cin &gt;&gt; n;</span><br><span class="line"><span class="built_in">getline</span>(cin, s); <span class="comment">//此时读取相当于读取了前一个回车字符</span></span><br></pre></td></tr></table></figure>
+
+<p>正确读取:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line">string s;</span><br><span class="line">cin &gt;&gt; n;</span><br><span class="line"><span class="built_in">getchar</span>(); <span class="comment">//cin.get()</span></span><br><span class="line"><span class="built_in">getline</span>(cin, s);<span class="comment">//可正确读入下一行的输入</span></span><br></pre></td></tr></table></figure>
+
+<p><code>cin</code>与<code>cin.getline()</code>混用</p>
+<p>cin输入完后，回车，cin遇到回车结束输入，但回车还在输入流中，cin并不会清除，导致<code>getline()</code>读取回车，结束。<br>需要在cin后面加<code>cin.ignore()</code>；主动删除输入流中的换行符。（不常用）</p>
+<p><strong>cin和cout解锁</strong></p>
+<p>代码（写在main函数开头）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么要进行cin和cout的解锁，原因是：</strong></p>
+<p>在一些题目中，读入的<strong>数据量很大</strong>，往往超过了1e5（105）的数据量,而cin和cout的读入输出的速度<strong>很慢</strong>（是因为cin和cout为了兼容C语言的读入输出在性能上做了妥协），远不如scanf和printf的速度，具体原因可以搜索相关的博客进行了解。</p>
+<p>所以对cin和cout进行解锁使cin和cout的速度几乎接近scanf和printf，避免输入输出超时。</p>
+<p><strong>注意</strong>：<code>cin cout</code>解锁使用时，不能与 <code>scanf,getchar, printf,cin.getline()</code>混用，一定要注意，会出错。</p>
+<p><strong>string于C语言字符串(C-string)的区别：</strong></p>
+<ul>
+<li>string<br>是C++的一个类，专门实现字符串的相关操作。具有丰富的操作方法，数据类型为<code>string</code>，字符串结尾没有<code>\0</code>字符</li>
+<li>C-string<br>C语言中的字符串，用char数组实现，类型为<code>const char *</code>,字符串结尾以<code>\0</code>结尾</li>
+</ul>
+<p>一般来说string向char数组转换会出现一些问题，所以为了能够实现转换，string有一个方法<code>c_str()</code>实现string向char数组的转换。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s = <span class="string">&quot;xing ma qi&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *s2 = s.<span class="built_in">c_str</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-5-函数方法"><a href="#9-5-函数方法" class="headerlink" title="9.5 函数方法"></a>9.5 函数方法</h4><ul>
+<li><p><strong>获取字符串长度</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s.size()<code>和</code>s.length()</td>
+<td>返回string对象的字符个数，他们执行效果相同。</td>
+</tr>
+<tr>
+<td>s.max_size()</td>
+<td>返回string对象最多包含的字符数，超出会抛出length_error异常</td>
+</tr>
+<tr>
+<td>s.capacity()</td>
+<td>重新分配内存之前，string对象能包含的最大字符数</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>插入</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s.push_back()</td>
+<td>在末尾插入</td>
+</tr>
+<tr>
+<td>例：<code>s.push_back(&#39;a&#39;)</code></td>
+<td>末尾插入一个字符a</td>
+</tr>
+<tr>
+<td>s.insert(pos,element)</td>
+<td>在pos位置插入element</td>
+</tr>
+<tr>
+<td>例：<code>s.insert(s.begin(),&#39;1&#39;)</code></td>
+<td>在第一个位置插入1字符</td>
+</tr>
+<tr>
+<td>s.append(str)</td>
+<td>在s字符串结尾添加str字符串</td>
+</tr>
+<tr>
+<td>例：<code>s.append(&quot;abc&quot;)</code></td>
+<td>在s字符串末尾添加字符串“abc”</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>删除</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>erase(iterator p)</td>
+<td>删除字符串中p所指的字符</td>
+</tr>
+<tr>
+<td>erase(iterator first, iterator last)</td>
+<td>删除字符串中迭代器区间<code>[first,last)</code>上所有字符</td>
+</tr>
+<tr>
+<td>erase(pos, len)</td>
+<td>删除字符串中从索引位置pos开始的len个字符</td>
+</tr>
+<tr>
+<td>clear()</td>
+<td>删除字符串中所有字符</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>字符替换</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s.replace(pos,n,str)</td>
+<td>把当前字符串从索引pos开始的n个字符替换为str</td>
+</tr>
+<tr>
+<td>s.replace(pos,n,n1,c)</td>
+<td>把当前字符串从索引pos开始的n个字符替换为n1个字符c</td>
+</tr>
+<tr>
+<td>s.replace(it1,it2,str)</td>
+<td>把当前字符串<code>[it1,it2)</code>区间替换为str <strong>it1 ,it2为迭代器哦</strong></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>大小写转换</strong></p>
+<p>法一：</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tolower(s[i])</td>
+<td>转换为小写</td>
+</tr>
+<tr>
+<td>toupper(s[i])</td>
+<td>转换为大写</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>法二：</p>
+<p>通过stl的<code>transform</code>算法配合<code>tolower</code> 和<code>toupper</code> 实现。<br>有4个参数，前2个指定要转换的容器的起止范围，第3个参数是结果存放容器的起始位置，第4个参数是一元运算。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s;</span><br><span class="line"><span class="built_in">transform</span>(s.<span class="built_in">begin</span>(),s.<span class="built_in">end</span>(),s.<span class="built_in">begin</span>(),::tolower);<span class="comment">//转换小写</span></span><br><span class="line"><span class="built_in">transform</span>(s.<span class="built_in">begin</span>(),s.<span class="built_in">end</span>(),s.<span class="built_in">begin</span>(),::toupper);<span class="comment">//转换大写</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>分割</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s.substr(pos,n)</td>
+<td>截取从pos索引开始的n个字符</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>查找</strong></p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s.find (str, pos)</td>
+<td>在当前字符串的pos索引位置（默认为0）开始，查找子串str，返回找到的位置索引，-1表示查找不到子串</td>
+</tr>
+<tr>
+<td>s.find (c, pos)</td>
+<td>在当前字符串的pos索引位置（默认为0）开始，查找字符c，返回找到的位置索引，-1表示查找不到字符</td>
+</tr>
+<tr>
+<td>s.rfind (str, pos)</td>
+<td>在当前字符串的pos索引位置开始，反向查找子串s，返回找到的位置索引，-1表示查找不到子串</td>
+</tr>
+<tr>
+<td>s.rfind (c,pos)</td>
+<td>在当前字符串的pos索引位置开始，反向查找字符c，返回找到的位置索引，-1表示查找不到字符</td>
+</tr>
+<tr>
+<td>s.find_first_of (str, pos)</td>
+<td>在当前字符串的pos索引位置（默认为0）开始，查找子串s的字符，返回找到的位置索引，-1表示查找不到字符</td>
+</tr>
+<tr>
+<td>s.find_first_not_of (str,pos)</td>
+<td>在当前字符串的pos索引位置（默认为0）开始，查找第一个不位于子串s的字符，返回找到的位置索引，-1表示查找不到字符</td>
+</tr>
+<tr>
+<td>s.find_last_of(str, pos)</td>
+<td>在当前字符串的pos索引位置开始，查找最后一个位于子串s的字符，返回找到的位置索引，-1表示查找不到字符</td>
+</tr>
+<tr>
+<td>s.find_last_not_of ( str, pos)</td>
+<td>在当前字符串的pos索引位置开始，查找最后一个不位于子串s的字符，返回找到的位置索引，-1表示查找不到子串</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">string <span class="title">s</span><span class="params">(<span class="string">&quot;dog bird chicken bird cat&quot;</span>)</span></span>;</span><br><span class="line"><span class="comment">//字符串查找-----找到后返回首字母在字符串中的下标</span></span><br><span class="line"><span class="comment">// 1. 查找一个字符串</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">find</span>(<span class="string">&quot;chicken&quot;</span>) &lt;&lt; endl;<span class="comment">// 结果是：9</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 2. 从下标为6开始找字符&#x27;i&#x27;，返回找到的第一个i的下标</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">find</span>(<span class="string">&#x27;i&#x27;</span>,<span class="number">6</span>) &lt;&lt; endl;<span class="comment">// 结果是：11</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 3. 从字符串的末尾开始查找字符串，返回的还是首字母在字符串中的下标</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">rfind</span>(<span class="string">&quot;chicken&quot;</span>) &lt;&lt; endl;<span class="comment">// 结果是：9</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 4. 从字符串的末尾开始查找字符</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">rfind</span>(<span class="string">&#x27;i&#x27;</span>) &lt;&lt; endl;<span class="comment">// 结果是：18因为是从末尾开始查找，所以返回第一次找到的字符</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 5. 在该字符串中查找第一个属于字符串s的字符</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">find_first_of</span>(<span class="string">&quot;13br98&quot;</span>) &lt;&lt; endl;<span class="comment">// 结果是：4---b</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 6. 在该字符串中查找第一个不属于字符串s的字符------先匹配dog，然后bird匹配不到，所以打印4</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">find_first_not_of</span>(<span class="string">&quot;hello dog 2006&quot;</span>) &lt;&lt; endl; <span class="comment">// 结果是：4</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">find_first_not_of</span>(<span class="string">&quot;dog bird 2006&quot;</span>) &lt;&lt; endl;  <span class="comment">// 结果是：9</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 7. 在该字符串最后中查找第一个属于字符串s的字符</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">find_last_of</span>(<span class="string">&quot;13r98&quot;</span>) &lt;&lt; endl;<span class="comment">// 结果是：19</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 8. 在该字符串最后中查找第一个不属于字符串s的字符------先匹配t--a---c，然后空格匹配不到，所以打印21</span></span><br><span class="line">    cout &lt;&lt; s.<span class="built_in">find_last_not_of</span>(<span class="string">&quot;teac&quot;</span>) &lt;&lt; endl;<span class="comment">// 结果是：21</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>排序</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span>(s.<span class="built_in">begin</span>(),s.<span class="built_in">end</span>());<span class="comment">//按照ASCII排序</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="十、-bitset"><a href="#十、-bitset" class="headerlink" title="十、 bitset"></a>十、 bitset</h3><h4 id="10-1-介绍"><a href="#10-1-介绍" class="headerlink" title="10.1 介绍"></a>10.1 介绍</h4><p>bitset在bitset头文件中，它类似数组，并且每一个元素只能是0或1，每一个元素只用1bit空间</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//头文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bitset&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-2-初始化定义"><a href="#10-2-初始化定义" class="headerlink" title="10.2 初始化定义"></a>10.2 初始化定义</h4><p>初始化方法</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bitset<n> a</td>
+<td>a有n位，每位都是0</td>
+</tr>
+<tr>
+<td>bitset &lt; n &gt;a(b)</td>
+<td>a是unsigned long型u的一个副本</td>
+</tr>
+<tr>
+<td>bitset &lt; n &gt;a(s)</td>
+<td>a是string对象s中含有的位串的副本</td>
+</tr>
+<tr>
+<td>bitset &lt; n &gt;a(s,pos,n)</td>
+<td>a是s中从位置pos开始的n个位的副本</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>注意：<code>n</code>必须为常量表达式</p>
+<p><strong>演示代码</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	bitset&lt;4&gt; bitset1;　　  <span class="comment">//无参构造，长度为４，默认每一位为０</span></span><br><span class="line">	</span><br><span class="line">	<span class="function">bitset&lt;9&gt; <span class="title">bitset2</span><span class="params">(<span class="number">12</span>)</span></span>;　<span class="comment">//长度为9，二进制保存，前面用０补充</span></span><br><span class="line">	</span><br><span class="line">	string s = <span class="string">&quot;100101&quot;</span>;</span><br><span class="line">	<span class="function">bitset&lt;10&gt; <span class="title">bitset3</span><span class="params">(s)</span></span>;　　<span class="comment">//长度为10，前面用０补充</span></span><br><span class="line">	</span><br><span class="line">	<span class="type">char</span> s2[] = <span class="string">&quot;10101&quot;</span>;</span><br><span class="line">	<span class="function">bitset&lt;13&gt; <span class="title">bitset4</span><span class="params">(s2)</span></span>;　　<span class="comment">//长度为13，前面用０补充</span></span><br><span class="line">	</span><br><span class="line">	cout &lt;&lt; bitset1 &lt;&lt; endl;　　<span class="comment">//0000</span></span><br><span class="line">	cout &lt;&lt; bitset2 &lt;&lt; endl;　　<span class="comment">//000001100</span></span><br><span class="line">	cout &lt;&lt; bitset3 &lt;&lt; endl;　　<span class="comment">//0000100101</span></span><br><span class="line">	cout &lt;&lt; bitset4 &lt;&lt; endl;　<span class="comment">//0000000010101</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="10-3-特性"><a href="#10-3-特性" class="headerlink" title="10.3 特性"></a>10.3 特性</h4><p><code>bitset</code>可以进行<strong>位操作</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">bitset&lt;4&gt; <span class="title">foo</span> <span class="params">(string(<span class="string">&quot;1001&quot;</span>))</span></span>;</span><br><span class="line"><span class="function">bitset&lt;4&gt; <span class="title">bar</span> <span class="params">(string(<span class="string">&quot;0011&quot;</span>))</span></span>;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo^=bar) &lt;&lt; endl;<span class="comment">// 1010 (foo对bar按位异或后赋值给foo)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo&amp;=bar) &lt;&lt; endl;<span class="comment">// 0001 (按位与后赋值给foo)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo|=bar) &lt;&lt; endl;<span class="comment">// 1011 (按位或后赋值给foo)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo&lt;&lt;=<span class="number">2</span>) &lt;&lt; endl;<span class="comment">// 0100 (左移2位，低位补0，有自身赋值)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo&gt;&gt;=<span class="number">1</span>) &lt;&lt; endl;<span class="comment">// 0100 (右移1位，高位补0，有自身赋值)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (~bar) &lt;&lt; endl;<span class="comment">// 1100 (按位取反)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (bar&lt;&lt;<span class="number">1</span>) &lt;&lt; endl;<span class="comment">// 0110 (左移，不赋值)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (bar&gt;&gt;<span class="number">1</span>) &lt;&lt; endl;<span class="comment">// 0001 (右移，不赋值)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo==bar) &lt;&lt; endl;<span class="comment">// false (1001==0011为false)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo!=bar) &lt;&lt; endl;<span class="comment">// true  (1001!=0011为true)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo&amp;bar) &lt;&lt; endl;<span class="comment">// 0001 (按位与，不赋值)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo|bar) &lt;&lt; endl;<span class="comment">// 1011 (按位或，不赋值)</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (foo^bar) &lt;&lt; endl;<span class="comment">// 1010 (按位异或，不赋值)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>访问</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以通过 [ ] 访问元素(类似数组)，注意最低位下标为０，如下：</span></span><br><span class="line"><span class="function">bitset&lt;4&gt; <span class="title">foo</span> <span class="params">(<span class="string">&quot;1011&quot;</span>)</span></span>; </span><br><span class="line"></span><br><span class="line">cout &lt;&lt; foo[<span class="number">0</span>] &lt;&lt; endl;　　<span class="comment">//1</span></span><br><span class="line">cout &lt;&lt; foo[<span class="number">1</span>] &lt;&lt; endl;　　<span class="comment">//0</span></span><br><span class="line">cout &lt;&lt; foo[<span class="number">2</span>] &lt;&lt; endl;　　<span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="10-4-方法函数"><a href="#10-4-方法函数" class="headerlink" title="10.4 方法函数"></a>10.4 方法函数</h4><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b.any()</td>
+<td>b中是否存在置为1的二进制位，有 返回true</td>
+</tr>
+<tr>
+<td>b.none()</td>
+<td>b中是否没有1，没有 返回true</td>
+</tr>
+<tr>
+<td>b.count()</td>
+<td>b中为1的个数</td>
+</tr>
+<tr>
+<td>b.size()</td>
+<td>b中二进制位的个数</td>
+</tr>
+<tr>
+<td>b.test(pos)</td>
+<td>测试b在pos位置是否为1，是 返回true</td>
+</tr>
+<tr>
+<td>b[pos]</td>
+<td>返回b在pos处的二进制位</td>
+</tr>
+<tr>
+<td>b.set()</td>
+<td>把b中所有位都置为1</td>
+</tr>
+<tr>
+<td>b.set(pos)</td>
+<td>把b中pos位置置为1</td>
+</tr>
+<tr>
+<td>b.reset()</td>
+<td>把b中所有位都置为0</td>
+</tr>
+<tr>
+<td>b.reset(pos)</td>
+<td>把b中pos位置置为0</td>
+</tr>
+<tr>
+<td>b.flip()</td>
+<td>把b中所有二进制位取反</td>
+</tr>
+<tr>
+<td>b.flip(pos)</td>
+<td>把b中pos位置取反</td>
+</tr>
+<tr>
+<td>b.to_ulong()</td>
+<td>用b中同样的二进制位返回一个unsigned long值</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/pluto/2024/07/10/STL06/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/pluto/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" #.">
+                    Unclassified
+                </a>
+            </div>
+            <h5>
+                <a href="/pluto/2024/07/10/STL06/" class="trm-anima-link">
+                    STL学习打卡Day06
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/07/10</li>
+                <li>15:00</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/pluto/2024/07/09/STL04/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/pluto/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" #.">
+                    Unclassified
+                </a>
+            </div>
+            <h5>
+                <a href="/pluto/2024/07/09/STL04/" class="trm-anima-link">
+                    STL学习打卡Day04
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>24/07/09</li>
+                <li>22:00</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v7.2.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                Theme - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.2.2
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="Back To Top">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/pluto/js/plugins/typing.js?v=2.2.2"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/pluto/js/main.js?v=2.2.2"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
